@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { emailChanged } from '../actions';
 import { Card, CardSection, Input, Button } from './common';
 
 class LoginForm extends Component {
+    onEmailChange(text){
+        this.props.emailChanged(text);
+    }
+
     render(){
         <Card>
             <CardSection>
-                <Input label="Email" placeholder="email@gmail.com" />
+                <Input label="Email" placeholder="email@gmail.com" onChangeText={this.onEmailChange.bind(this)} />
             </CardSection>
 
             <CardSection>
@@ -18,3 +24,6 @@ class LoginForm extends Component {
         </Card>
     };
 }
+
+// No mapStateToProps function yet so use null
+export default connect(null, { emailChanged })(Login);
