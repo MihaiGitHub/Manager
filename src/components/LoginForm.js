@@ -11,7 +11,11 @@ class LoginForm extends Component {
     render(){
         <Card>
             <CardSection>
-                <Input label="Email" placeholder="email@gmail.com" onChangeText={this.onEmailChange.bind(this)} />
+                <Input 
+                    label="Email" 
+                    placeholder="email@gmail.com" 
+                    onChangeText={this.onEmailChange.bind(this)} 
+                    value={this.props.email} />
             </CardSection>
 
             <CardSection>
@@ -25,5 +29,10 @@ class LoginForm extends Component {
     };
 }
 
-// No mapStateToProps function yet so use null
-export default connect(null, { emailChanged })(Login);
+const mapStateToProps = state => {
+    return {
+        email: state.auth.email
+    };
+}
+
+export default connect(mapStateToProps, { emailChanged })(Login);
