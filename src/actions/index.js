@@ -21,8 +21,17 @@ export const loginUser = ({ email, password }) => {
     // Manually dispatching action when the async request is complete and returning type and payload
     return (dispatch) => {
         firebase.auth().signInWithEmailAndPassword(email, password)
-        .then(user => {
-            dispatch({ type: LOGIN_USER_SUCCESS, payload: user })
+        .then(user => loginUserSuccess(dispatch, user))
+        .catch(() => {
+            firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(email, password)
+                .then(user => loginUserSuccess(dispatch, user));
         });
     };
+};
+
+const loginUserSuccess = (dispatch, user) => {
+    dispatch({
+        type: LOGIN_USER_SUCCESS,
+        payload: user
+    });
 };
