@@ -1,5 +1,11 @@
 import firebase from 'firebase';
-import { EMAIL_CHANGED, PASSWORD_CHANGED, LOGIN_USER_SUCCESS, LOGIN_USER_FAIL } from './types';
+import { 
+    EMAIL_CHANGED, 
+    PASSWORD_CHANGED, 
+    LOGIN_USER_SUCCESS, 
+    LOGIN_USER_FAIL,
+    LOGIN_USER
+} from './types';
 
 export const emailChanged = (text) => {
     return {
@@ -20,6 +26,9 @@ export const loginUser = ({ email, password }) => {
     // Action creator returning a function; Redux thunk calls this function
     // Manually dispatching action when the async request is complete and returning type and payload
     return (dispatch) => {
+        // To show spinner while user is being logged in
+        dispatch({ type: LOGIN_USER });
+
         firebase.auth().signInWithEmailAndPassword(email, password)
         .then(user => loginUserSuccess(dispatch, user))
         .catch(() => {
