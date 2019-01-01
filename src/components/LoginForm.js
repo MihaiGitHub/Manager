@@ -76,6 +76,7 @@ const styles = {
     }
 }
 
+// This is pulling the properties from state and making them available in this component
 const mapStateToProps = ({auth}) => {
     const { email, password, error, loading } = auth;
 
