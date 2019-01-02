@@ -24,7 +24,7 @@ class LoginForm extends Component {
         if(this.props.error){
             return (
                 <View style={{ backgroundColor: 'white' }}>
-                    <Text style={StyleSheet.errorTextStyle}>{this.props.error}</Text>
+                    <Text style={styles.errorTextStyle}>{this.props.error}</Text>
                 </View>
             );
         }
@@ -41,30 +41,32 @@ class LoginForm extends Component {
     }
 
     render(){
-        <Card>
-            <CardSection>
-                <Input 
-                    label="Email" 
-                    placeholder="email@gmail.com" 
-                    onChangeText={this.onEmailChange.bind(this)} 
-                    value={this.props.email} />
-            </CardSection>
+        return (
+            <Card>
+                <CardSection>
+                    <Input 
+                        label="Email" 
+                        placeholder="email@gmail.com" 
+                        onChangeText={this.onEmailChange.bind(this)} 
+                        value={this.props.email} />
+                </CardSection>
 
-            <CardSection>
-                <Input 
-                    secureTextEntry 
-                    label="Password" 
-                    placeholder="password" 
-                    onChangeText={this.onPasswordChange.bind(this)}
-                    value={this.props.password} />
-            </CardSection>
+                <CardSection>
+                    <Input 
+                        secureTextEntry 
+                        label="Password" 
+                        placeholder="password" 
+                        onChangeText={this.onPasswordChange.bind(this)}
+                        value={this.props.password} />
+                </CardSection>
 
-            {this.renderError()}
+                {this.renderError()}
 
-            <CardSection>
-                {this.renderButton()}
-            </CardSection>
-        </Card>
+                <CardSection>
+                    {this.renderButton()}
+                </CardSection>
+            </Card>
+        );
     };
 }
 
@@ -86,4 +88,4 @@ const mapStateToProps = ({auth}) => {
 
 export default connect(mapStateToProps, { 
     emailChanged, passwordChanged, loginUser 
-})(Login);
+})(LoginForm);
