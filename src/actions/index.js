@@ -49,6 +49,6 @@ const loginUserSuccess = (dispatch, user) => {
         type: LOGIN_USER_SUCCESS,
         payload: user
     });
-    // employeeList = key from Scene; Change scene to employeeList after login success
-    Actions.employeeList();
+    // main = key from Scene; Change scene to employeeList after login success
+    Actions.main();
 };
