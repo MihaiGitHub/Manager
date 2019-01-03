@@ -23,4 +23,13 @@ class EmployeeCreate extends Component {
     }
 }
 
+// mapStateToProps is needed when properties from state are needed in this component
+const mapStateToProps = (state) => {
+    // Pulling off properties from state employeeForm which is created from reducer
+    const { name, phone, shift } = state.employeeForm;
+
+    // Return these values to be available in component after it rerenders
+    return { name, phone, shift };
+}
+
 export default connect(null, { employeeCreate })(EmployeeCreate);
