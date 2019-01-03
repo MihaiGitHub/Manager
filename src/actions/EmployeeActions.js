@@ -1,11 +1,11 @@
 import {
-    EMPLOYEE_UPDATE
+    EMPLOYEE_CREATE
 } from './types';
 
 // One action creator that can update any different prop that exists inside the form
-export const employeeUpdate = ({ prop, value }) => {
+export const employeeCreate = ({ prop, value }) => {
     return {
-        type: EMPLOYEE_UPDATE,
+        type: EMPLOYEE_CREATE,
         payload: { prop, value }
     }
 }
