@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Picker, Text, View } from 'react-native';
 import { connect } from 'react-redux';
-import { employeeCreate } from '../actions';
+import { employeeUpdate } from '../actions';
 import { Card, CardSection, InputAccessoryView, Button, Input } from './common';
 
 class EmployeeCreate extends Component {
@@ -13,7 +13,7 @@ class EmployeeCreate extends Component {
                         label="Name" 
                         placeholder="Jane" 
                         value={this.props.name} 
-                        onChangeText={text => this.props.employeeCreate({ prop: 'name', value: text })} />
+                        onChangeText={text => this.props.employeeUpdate({ prop: 'name', value: text })} />
                 </CardSection>
 
                 <CardSection>
@@ -21,7 +21,7 @@ class EmployeeCreate extends Component {
                         label="Phone" 
                         placeholder="555-555-5555" 
                         value={this.props.phone} 
-                        onChangeText={text => this.props.employeeCreate({ prop: 'phone', value: text })} />
+                        onChangeText={text => this.props.employeeUpdate({ prop: 'phone', value: text })} />
                 </CardSection>
 {/* This is a custom created component and style is only a property passed down into it 
 Cardsection default style is flexDirection: 'row' (all it's children being layed out left to right)  
@@ -31,7 +31,7 @@ flexDirection: 'column' will place the CardSection children in a column (one on 
 
                         <Picker style={{ width: '90%', alignSelf: 'center' }}
                             selectedValue={this.props.shift} 
-                            onValueChange={day => this.props.employeeCreate({ prop: 'shift', value: day })} 
+                            onValueChange={day => this.props.employeeUpdate({ prop: 'shift', value: day })} 
                         >
                             <Picker.Item label="Monday" value="Monday" />
                             <Picker.Item label="Tuesday" value="Tuesday" />
@@ -68,4 +68,4 @@ const mapStateToProps = (state) => {
     return { name, phone, shift };
 }
 
-export default connect(mapStateToProps, { employeeCreate })(EmployeeCreate);
+export default connect(mapStateToProps, { employeeUpdate })(EmployeeCreate);

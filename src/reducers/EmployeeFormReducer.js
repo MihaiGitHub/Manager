@@ -1,12 +1,12 @@
 import {
-    EMPLOYEE_CREATE
+    EMPLOYEE_UPDATE
 } from '../actions/types';
 
 const INITIAL_STATE = { name: '', phone: '', shift: '' };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type){
-        case EMPLOYEE_CREATE:
+        case EMPLOYEE_UPDATE:
         // action.payload === { prop: 'name', value: 'jane' }
         // [] = key interpolation
         // The key added to the object will be determined at runtime
