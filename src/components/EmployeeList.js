@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ListView, View, Text } from 'react-native';
@@ -46,6 +47,17 @@ class EmployeeList extends Component {
     }
 }
 
-// Anytime state updates, connect helper will rerun mapStateToProps to make it available as props in component
+const mapStateToProps = state => {
+    // Loop over state.employees object and for each key value pair run the => function
+    // uid is the key of the employee; the key of the record
+    // Create an employees array from the object; 0: { shift: 'Monday', name: 'S', id: '123' }
+    const employees = _.map(state.employees, (val, uid) => {
+        // return a new object with all the properties of the employee model and the user id
+        return { ...val, uid }; // { shift: 'Monday', name: 'S', id: '123' }
+    });
 
-export default connect(null, { employeesFetch })(EmployeeList);
+    return {employees};
+};
+
+// Anytime state updates, connect helper will rerun mapStateToProps to make it available as props in component
+export default connect(mapStateToProps, { employeesFetch })(EmployeeList);
