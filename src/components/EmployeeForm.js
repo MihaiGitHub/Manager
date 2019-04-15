@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Picker } from 'react-native';
+import { connect } from 'react-redux';
+import { employeeUpdate } from '../actions';
 import { CardSection, Input } from './common';
 
 class EmployeeForm extends Component {
@@ -53,4 +55,12 @@ const styles = {
     }
 };
 
-export default EmployeeForm;
+// MapStateToProps to pull in the name, phone, and shift of employee
+const mapStateToProps = (state) => {
+    // Reach out to the state of employee form and pull off values to bring to this component properties
+    const { name, phone, shift } = state.employeeForm;
+
+    return { name, phone, shift };
+};
+
+export default connect(mapStateToProps, { employeeUpdate })(EmployeeForm);
