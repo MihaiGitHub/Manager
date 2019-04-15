@@ -6,7 +6,7 @@ import { Actions } from 'react-native-router-flux';
 class ListItem extends Component {
     onRowPress() {
         // Employee create form will be rendered with additional prop of employee
-        Actions.employeeCreate({ employee: this.props.employee });
+        Actions.employeeEdit({ employee: this.props.employee });
     }
 
     render(){
