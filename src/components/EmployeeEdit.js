@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import EmployeeForm from './EmployeeForm';
 // This action creator is what changes the state of the reducer with new employee data
-import { employeeUpdate } from '../actions';
+import { employeeUpdate, employeeSave } from '../actions';
 import { Card, CardSection, Button } from './common';
 
 class EmployeeEdit extends Component {
@@ -18,7 +18,8 @@ class EmployeeEdit extends Component {
 
     onButtonPress(){
         const { name, phone, shift } = this.props;
-
+        // employee is passed in as a prop from Actions.employeeEdit in ListItem.js
+        this.props.employeeSave({ name, phone, shift, uid: this.props.employee.uid });
     }
 
     render(){
@@ -41,4 +42,6 @@ const mapStateToProps = (state) => {
     return { name, phone, shift };
 };
 
-export default connect(mapStateToProps, { employeeUpdate })(EmployeeEdit);
+export default connect(mapStateToProps, { 
+    employeeUpdate, employeeSave 
+})(EmployeeEdit);

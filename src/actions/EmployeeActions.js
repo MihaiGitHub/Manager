@@ -3,6 +3,7 @@ import { Actions } from 'react-native-router-flux';
 import {
     EMPLOYEE_UPDATE, EMPLOYEE_CREATE, EMPLOYEES_FETCH_SUCCESS
 } from './types';
+import console = require('console');
 
 // One action creator that can update any different prop that exists inside the form
 export const employeeUpdate = ({ prop, value }) => {
@@ -40,5 +41,15 @@ export const employeeFetch = () => {
                 // component will take the employees and render them
                 dispatch({ type: EMPLOYEES_FETCH_SUCCESS, payload: snapshot.val() });
             });
+    }
+}
+
+export const employeeSave = ({ name, phone, shift, uid }) => {
+    const { currentUser } = firebase.auth();
+
+    return () => {
+        firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
+            .set({ name, phone, shift })
+            .then(() => console.log('saved'));
     }
 }
