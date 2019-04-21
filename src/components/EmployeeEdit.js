@@ -6,9 +6,15 @@ import Communications from 'react-native-communications';
 import EmployeeForm from './EmployeeForm';
 // This action creator is what changes the state of the reducer with new employee data
 import { employeeUpdate, employeeSave } from '../actions';
-import { Card, CardSection, Button } from './common';
+import { Card, CardSection, Button, Confirm } from './common';
 
 class EmployeeEdit extends Component {
+    // Visibility of modal is only for this component so don't need to use Redux
+    // Can have component level state
+    state = {
+        showModal: false
+    }
+
     componentWillMount(){
         // Loop through the employee model coming into this component
         // Update reducer with every property on that object
@@ -43,6 +49,14 @@ class EmployeeEdit extends Component {
                         Text Schedule
                     </Button>
                 </CardSection>
+                <CardSection>
+                    <Button onPress={() => this.setState({ showModal: !this.state.showModal })}>
+                        Fire Employee
+                    </Button>
+                </CardSection>
+                <Confirm visible={this.state.showModal}>
+                    Are you sure you want to delete this?
+                </Confirm>
             </Card>
         );
     }
