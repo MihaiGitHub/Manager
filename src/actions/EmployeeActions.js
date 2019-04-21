@@ -56,3 +56,17 @@ export const employeeSave = ({ name, phone, shift, uid }) => {
             });
     }
 }
+
+export const employeeDelete = ({ uid }) => {
+    const { currentUser } = firebase.auth();
+
+    return (dispatch) => {
+        firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
+            .remove()
+            .then(() => {
+                // Once employee delete it will redirect to employee list and fetch employees 
+                // Then run employeeFetch with it's own dispatch
+                Actions.employeeList({ type: 'reset' });
+            })
+    }
+}
